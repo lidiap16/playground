@@ -63,11 +63,11 @@ def main():
                         next_forest[y][x] = "T1"
 
                 elif (forest[y][x] == "T") and (random.random() <= FIRE_CHANCE):
-                    # Normal tree struck by lightning
+                  
                     next_forest[y][x] = "F"
 
                 elif (forest[y][x] == "T1") and (random.random() <= FIRE_CHANCE * 0.5):
-                    # Special tree struck by lightning (harder to ignite)
+                 #harder to ignite tree
                     next_forest[y][x] = "F"
 
                 elif forest[y][x] == "F":
@@ -80,7 +80,7 @@ def main():
                                         if random.random() <= FIRE_SPREAD_CHANCE:
                                             next_forest[y + iy][x + ix] = "F"
                                     elif forest[y + iy][x + ix] == "T1":
-                                        if random.random() <= FIRE_SPREAD_CHANCE * 0.3:  # harder to spread
+                                        if random.random() <= FIRE_SPREAD_CHANCE * 0.3:  # harder to spread to better trees
                                             next_forest[y + iy][x + ix] = "F"
                     # Fire burns out
                     next_forest[y][x] = " "
@@ -90,10 +90,10 @@ def main():
 
         forest = next_forest
 
-        time.sleep(PAUSE_LENGTH)
+        time.sleep(PAUSE_LENGTH) #pause for set time
         pygame.display.update()
 
-    # Plot results
+    # Plot results on graph
     fig, ax = plt.subplots()
     ax.plot(trees, color='green', label='Trees (T+T1)')
     ax.plot(fires, color='red', label='Fire')
@@ -103,7 +103,7 @@ def main():
     plt.show()
 
 
-# Initialise a Random Map of Trees
+# create a Random Map of Trees
 def createNewForest():
     map = []
     for y in range(MAP_HEIGHT):
@@ -116,7 +116,7 @@ def createNewForest():
         map.append(row)
     return map
 
-# Draw the forest
+#sub in img, the forest
 def displayForest(forest):
     for x in range(MAP_WIDTH):
         for y in range(MAP_HEIGHT):
@@ -133,4 +133,5 @@ if __name__ == '__main__':
 
 
 # if __name__ == '__main__':
+
 #     main(fire_spread_chance=0.3, grow_chance=0.9, fire_chance=0.02)
