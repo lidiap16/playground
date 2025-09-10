@@ -3,14 +3,15 @@ import pygame
 import matplotlib.pyplot as plt
 
 SC_WIDTH, SC_HEIGHT = 820, 820
-MAP_WIDTH, MAP_HEIGHT = 20, 20
+MAP_WIDTH, MAP_HEIGHT = 19, 19
 TILE_SIZE = 55
-INITIAL_TREE_DENSITY = 0.50
-GROW_CHANCE = 0.4
-FIRE_CHANCE = 0.01
-FIRE_SPREAD_CHANCE = 0.5
+INITIAL_TREE_DENSITY = 0.99
+GROW_CHANCE = 0.0
+FIRE_CHANCE = 0.0
+FIRE_SPREAD_CHANCE = 0.8
 PAUSE_LENGTH = 0.6
 SIM_LENGTH = 25
+
 
 pygame.init()
 screen = pygame.display.set_mode((SC_WIDTH, SC_HEIGHT))
@@ -61,14 +62,14 @@ def main():
                         next_forest[y][x] = "T"
                     else:
                         next_forest[y][x] = "T1"
-
-                elif (forest[y][x] == "T") and (random.random() <= FIRE_CHANCE):
-                  
-                    next_forest[y][x] = "F"
-
-                elif (forest[y][x] == "T1") and (random.random() <= FIRE_CHANCE * 0.5):
-                 #harder to ignite tree
-                    next_forest[y][x] = "F"
+# 
+#                 elif (forest[y][x] == "T") and (random.random() <= FIRE_CHANCE):
+#                   
+#                     next_forest[y][x] = "F"
+# 
+#                 elif (forest[y][x] == "T1") and (random.random() <= FIRE_CHANCE * 0.5):
+#                  #harder to ignite tree
+#                     next_forest[y][x] = "F"
 
                 elif forest[y][x] == "F":
                     # Spread fire to neighbours
@@ -112,7 +113,8 @@ def createNewForest():
             if random.random() <= INITIAL_TREE_DENSITY:
                 row.append("T1" if random.random() < 0.5 else "T")
             else:
-                row.append(" ")
+                row.append('F')
+            
         map.append(row)
     return map
 
